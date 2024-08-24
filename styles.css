@@ -1,0 +1,25 @@
+
+body {
+    background-color: #f1f1f1;
+    font-family: Consolas;
+}
+.index {
+    margin: auto;
+    text-align: center;
+    padding: 200px;
+}
+
+p {
+    font-size: small;
+    font-style: normal;
+    font-family: serif;
+}
+
+a {
+    color: #3a4f41;
+}
+ul {
+    font-size: small;
+    font-family: serif;
+    list-style-type: circle;
+}
