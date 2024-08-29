@@ -1,7 +1,8 @@
-
-body.resume {
+body {
     background-color: #f1f1f1;
     font-family: Consolas;
+}
+body.resume {
     width: 816px;
 }
 .index {
@@ -13,7 +14,6 @@ body.resume {
 p {
     font-size: small;
     font-style: normal;
-    font-family: serif;
 }
 
 a {
@@ -21,6 +21,5 @@ a {
 }
 ul {
     font-size: small;
-    font-family: serif;
     list-style-type: circle;
 }
