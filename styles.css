@@ -1,7 +1,8 @@
 
-body {
+body.resume {
     background-color: #f1f1f1;
     font-family: Consolas;
+    width: 816px;
 }
 .index {
     margin: auto;
