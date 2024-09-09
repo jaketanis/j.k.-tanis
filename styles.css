@@ -4,11 +4,16 @@ body {
 }
 body.resume {
     width: 816px;
+    padding-left: 15px;
 }
 .index {
     margin: auto;
     text-align: center;
     padding: 200px;
+}
+
+.projects {
+
 }
 
 p {
