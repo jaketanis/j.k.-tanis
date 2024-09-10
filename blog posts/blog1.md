@@ -1,5 +1,7 @@
-#My philosophy for technical communication
-
+---
+title: What is technical writing?
+date: September 22, 2024
+---
 What is technical communication? What is technical writing? 
 
 I get these questions a lot, and so does probably every technical writer ever lived. The 'go to' answer sounds along the lines of 'turning complex information into something understandable'or 'writing that helps others perform a task', which are all true statements. But I don't think those same statements honor these questions well.

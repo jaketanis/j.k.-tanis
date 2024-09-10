@@ -1,19 +1,17 @@
 body {
-    background-color: #f1f1f1;
+    background-color: #faf3e3;
     font-family: Consolas;
-}
-body.resume {
-    width: 816px;
-    padding-left: 15px;
-}
-.index {
     margin: auto;
-    text-align: center;
-    padding: 200px;
+    width: 700px;
 }
 
-.projects {
-    width: 816px;
+nav {
+    margin-left: auto;
+}
+
+.index {
+    text-align: center;
+    padding: 200px;
 }
 
 p {
