@@ -1,6 +1,7 @@
 body {
     background-color: #f1f1f1;
     font-family: Consolas;
+    color: #0E131F;
     margin: auto;
     width: 700px;
 }
@@ -20,7 +21,12 @@ p {
 }
 
 a {
-    color: #3a4f41;
+    color: #0E131F;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #6E9075
 }
 ul {
     font-size: small;
