@@ -1,6 +1,6 @@
 body {
     background-color: #f1f1f1;
-    font-family: Consolas;
+    font-family: Consolas, monospace;
     color: #0E131F;
     margin: auto;
     width: 700px;
@@ -31,4 +31,41 @@ a:hover {
 ul {
     font-size: small;
     list-style-type: circle;
+}
+
+@media (max-width: 768px) {
+    body {
+        background-color: #f1f1f1;
+        font-family: Consolas, monospace;
+        color: #0E131F;
+        margin: auto;
+        width: 700px;
+    }
+    
+    nav {
+        margin-left: auto;
+    }
+    
+    .index {
+        text-align: center;
+        padding: 200px;
+    }
+    
+    p {
+        font-size: small;
+        font-style: normal;
+    }
+    
+    a {
+        color: #0E131F;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        color: #6E9075
+    }
+    ul {
+        font-size: small;
+        list-style-type: circle;
+    }
 }
