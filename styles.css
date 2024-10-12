@@ -23,6 +23,21 @@
         line-height: 1.5;
     }
 
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.17rem;
+    }
+
+    h4 {
+         font-size: 1rem;
+    }
     a {
         color: #0E131F;
         text-decoration: none;
@@ -42,18 +57,14 @@
         line-height: 1.5;
     }
 }
-@media (max-width: 768px) and (max-width: 1024px) {
+@media (max-width: 768px) {
     body {
         background-color: #f1f1f1;
         font-family: Consolas, monospace;
         color: #0E131F;
-        margin: auto;
-        width: 100%;
-        overflow-x: hidden;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        padding-left: 20px;
-        padding-right: 20px;
+        width: 90%;
+        margin: 0%;
+        padding: 0.75rem;
     }
     
     nav {
@@ -62,12 +73,28 @@
     
     .index {
         text-align: center;
-        padding-top: 150px;
-        padding-bottom: 150px;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
     }
-    
-    p {
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    h3 {
         font-size: 1rem;
+    }
+
+    h4 {
+        font-size: .75rem;
+    }
+
+    p {
+        font-size: .875rem;
         font-style: normal;
         line-height: 1.5;
     }
@@ -75,7 +102,7 @@
     a {
         color: #0E131F;
         text-decoration: none;
-        font-size: 1rem;
+        font-size: .875rem;
         font-style: normal;
         line-height: 1.5;
     }
@@ -84,7 +111,7 @@
         color: #6E9075
     }
     ul {
-        font-size: 1rem;
+        font-size: .875rem;
         list-style-type: circle;
         font-style: normal;
         line-height: 1.5;
