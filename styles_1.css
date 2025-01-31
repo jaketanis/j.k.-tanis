@@ -1,8 +1,8 @@
 @media (min-width: 1025px) {
     body {
-        background-color: #f1f1f1;
-        font-family: Verdana, sans-serif, monospace;
-        color: #0E131F;
+        background-color: #E6DFD3;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #434341;
         margin: auto;
         max-width: 700px;
         overflow-x: hidden;
@@ -24,7 +24,8 @@
     }
 
     h1 {
-        font-size: 2rem;
+        font-size: 3rem;
+        color: #0351c7ff
     }
 
     h2 {
@@ -39,7 +40,7 @@
          font-size: 1rem;
     }
     a {
-        color: #0E131F;
+        color: #0351c7ff;
         text-decoration: none;
         font-size: 1rem;
         font-style: normal;
@@ -47,7 +48,7 @@
     }
 
     a:hover {
-        color: #6E9075
+        color: #a50104ff
     }
     ul {
         font-size: small;
@@ -59,9 +60,9 @@
 }
 @media (max-width: 768px) {
     body {
-        background-color: #f1f1f1;
-        font-family: Verdana, sans-serif, monospace;
-        color: #0E131F;
+        background-color: #E6DFD3;
+        font-family: sans-serif;
+        color: #434341;
         width: 90%;
         margin: 0%;
         padding: 0.75rem;
@@ -75,11 +76,11 @@
         text-align: left;
         padding-top: 6rem;
         padding-bottom: 6rem;
-        padding: 200px;
     }
 
     h1 {
         font-size: 1.5rem;
+        color: #0351c7ff
     }
 
     h2 {
@@ -101,7 +102,7 @@
     }
     
     a {
-        color: #0E131F;
+        color: #434341;
         text-decoration: none;
         font-size: .875rem;
         font-style: normal;
@@ -109,7 +110,7 @@
     }
     
     a:hover {
-        color: #6E9075
+        color: #a50104ff
     }
     ul {
         font-size: .875rem;
