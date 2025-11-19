@@ -1,3 +1,3 @@
-# j.k.-tanis
+# Jake Tanis
 [personal website
-](https://seiji-alyosha.github.io/j.k.-tanis/index.html)
+](https://jaketanis.github.io/j.k.-tanis/index.html)
