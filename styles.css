@@ -1,7 +1,7 @@
 @media (min-width: 1025px) {
     body {
         background-color: #f1f1f1;
-        font-family: Verdana, sans-serif, monospace;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         color: #0E131F;
         margin: auto;
         max-width: 700px;
@@ -46,7 +46,8 @@
     }
 
     a:hover {
-        color: #6E9075
+        color: #6E9075;
+        text-decoration: underline;
     }
     ul {
         font-size: small;
@@ -59,7 +60,7 @@
 @media (max-width: 768px) {
     body {
         background-color: #f1f1f1;
-        font-family: Verdana, sans-serif, monospace;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         color: #0E131F;
         width: 90%;
         margin: 0%;
@@ -98,7 +99,7 @@
     
     a {
         color: #0E131F;
-        text-decoration: none;
+        text-decoration: underline;
         font-size: .875rem;
         font-style: normal;
         line-height: 1.5;
