@@ -15,110 +15,213 @@
     <body>
         <h1>The “unbreakable” cipher</h1>
             <p>February 8th, 2026</p>
-            <p>Lewis Carroll is often known as the author of the childrens story “Through the Looking Glass”, but Carroll was also a prolific mathematician. Growing up, he was always creating puzzles and logic games, some of which are represented in the stories he wrote. In 1868, Carroll published a study about an invention of his called <a href="https://en.wikipedia.org/wiki/The_Alphabet_Cipher">“The Alphabet Cipher”</a>. This type of cipher is known as a Vignére cipher, which Caroll described as “unbreakable”.</p>
-            <p>The Vignére cipher encrypts a message based on a key. Each letter of the message changes based on the position of the letters within the key. The letters in the message shift based on the key’s corresponding letters’ position in the alphabet. For example:</p>
+            <p>Lewis Carroll is often known as the author of the
+            childrens story “Through the Looking Glass”, but Carroll was
+            also a prolific mathematician. Growing up, he was always
+            creating puzzles and logic games, some of which are
+            represented in the stories he wrote. In 1868, Carroll
+            published a study about an invention of his called <a
+            href="https://en.wikipedia.org/wiki/The_Alphabet_Cipher">“The
+            Alphabet Cipher”</a>. This type of cipher is known as a
+            Vignére cipher, which Caroll described as “unbreakable”.</p>
+            <p>The Vignére cipher encrypts a message based on a key.
+            Each letter of the message changes based on the position of
+            the letters within the key. The letters in the message shift
+            based on the key’s corresponding letters’ position in the
+            alphabet. For example:</p>
             <blockquote>
-            <p><code>message</code> is the message to encrypt and <code>key</code> is the key. Since <code>k</code> is the 10th letter in the alphabet (if <code>a</code> is considered as 0), and the letter <code>m</code> is the 12th letter, the first letter of the encrypted message is the 22nd letter, which is <code>w</code>. The fully encrypted message is <code>wiqceeo</code>.</p>
+            <p><code>message</code> is the message to encrypt and
+            <code>key</code> is the key. Since <code>k</code> is the
+            10th letter in the alphabet (if <code>a</code> is considered
+            as 0), and the letter <code>m</code> is the 12th letter, the
+            first letter of the encrypted message is the 22nd letter,
+            which is <code>w</code>. The fully encrypted message is
+            <code>wiqceeo</code>.</p>
             </blockquote>
-            <p>What was once seen as unbreakable to Carroll is actually quite doable for us with Python. I was able to create a script that two people could use to encrypt and decrypt messages with the Vignére cipher in a terminal. This was honestly an exercise to practice the lessons taught in the first project in <a href="https://www.freecodecamp.org/learn/scientific-computing-with-python/#learn-list-comprehension-by-building-a-case-converter-program">Scientific Computing with Python</a> by freeCodeCamp. After completing that project, I wanted to test what I learned; so, I created my own script based on what I learned in the project tutorial.</p>
-            <p>It took a lot longer than I thought, but the experience was valuable. I’m going to walk through how I created this script, what roadblocks I ran into, and what I learned in the process.</p>
-            <h2 id="creating-the-vignére-cipher-in-python">Creating the Vignére cipher in Python</h2>
-            <p>When I created this script, I intended to make it so that it could be easily used. I imagined two kids sending secret messages to eachother through text or email, using their own computer to run this script that decryps and encrypts the messages. This would require some user inputs, which was different from the project tutorial I went through. But I knew that the hardest part of the script would be to get the logic correct. So, I spent most of my time figuring that out.</p>
-            <p>To create the logic, I first defined what I needed to create the logic with. This included the alphabet, a key, and a message. The function would receive the message and the key, and then determine the new message based on that information. This looked something like this:</p>
-            <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>new_message <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
-            <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>alphabet <span class="op">=</span> <span class="st">&#39;abcdefghijklmnopqrstuvwxzy&#39;</span></span>
-            <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>message <span class="op">=</span> <span class="st">&#39;Hello!&#39;</span></span>
-            <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>key <span class="op">=</span> fanta</span>
-            <span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a></span>
-            <span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="kw">def</span> converter(message, key):</span></code></pre></div>
-            <p>This cipher does not take into account for capital letters, so I needed to convert the message string into all lower case. This is done through the <code>.lower()</code> function.</p>
-            <p>My next objective was to find the position of the letter in the alphabet. I also wanted to track the position of the letter in the message itself. Eventually, I realized I didn’t need to track the position of the letter in the message to accomplish my goals, so I ended up removing this later.</p>
-            <p>To track the poisition of the letter in the alphabet, I set up a <code>for</code> loop. This also served as the bedrock for further logic.</p>
-            <p>The remaining tasks for me to do in the loop were finding the letters of the key and their position in the alphabet.</p>
-            <p>After that, I needed to find the position of the letters of the encrypted message within the alphabet. To do this, I addeded together the positions of the message letters in the alphabet with the positions of the key letters in the alphabet. The final version looked likes this:</p>
-            <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">def</span> converter(message, key, direction<span class="op">=</span><span class="dv">1</span>):</span>
-            <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a></span>
-            <span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    lower_message <span class="op">=</span> message.lower()</span>
-            <span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>    key_index <span class="op">=</span> <span class="dv">0</span></span>
-            <span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>    final_message <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
-            <span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a></span>
-            <span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>    <span class="cf">for</span> char <span class="kw">in</span> lower_message:</span>
-            <span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>        <span class="cf">if</span> char.isalpha(): <span class="co"># used to convert</span></span>
-            <span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>            alpha_index <span class="op">=</span> alphabet.find(char)</span>
-            <span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>            key_char <span class="op">=</span> key[key_index <span class="op">%</span> <span class="bu">len</span>(key)] <span class="co"># modulo of key length is used to account for wrap-around</span></span>
-            <span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>            key_index <span class="op">+=</span> <span class="dv">1</span></span>
-            <span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a></span>
-            <span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>            key_alpha_index <span class="op">=</span> alphabet.index(key_char)</span>
-            <span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>            new_index <span class="op">=</span> (alpha_index <span class="op">+</span> key_alpha_index<span class="op">*</span>direction) <span class="op">%</span> <span class="bu">len</span>(alphabet) <span class="co"># modulo of alphabet length is to account for wrap-around</span></span>
-            <span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a></span>
-            <span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a>            new_char <span class="op">=</span> alphabet[new_index]</span>
-            <span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>            final_message <span class="op">+=</span> new_char</span></code></pre></div>
-            <p>There are a couple things that were hard for me to understand in the above code. The first thing was the use of the modulo operator (<code>%</code>). This operator returns the remainder of the division of two numbers. I learned in freeCodeCamp that it was used to account for wrap-around of a string when trying to find a character or an index in that string. What I had a hard time understanding was that when a number is divided by a number larger than itself, the remainder is 0. I guess I need brush up on math. But, this is useful to know when iterating through a string that isn’t the string used by the for loop (i.e. <code>lower_message</code> in <code>for char in lower_message</code>).</p>
-            <p>The other hard thing was understanding how to do what I just alluded to: work with strings that are not the string used in the for loop. We needed to work with the <code>key</code> string to find the letter in the same position as the message, but if the key and message had different character counts, we needed to wrap the key since we were iterating through each letter of the message in the for loop. I was trying to figure out the index of the key based on the for loop iteration, but I couldn’t figure that out. So I ended up seeing how I did it in the freeCodeCamp project, which ended being a counter.</p>
-            <p>After I figured out that logic, what was left was to combine the positions of the message character and the key character in the alphabet together, and then we have our encrypted letter. After that, we add that letter to a string. We keep doing that until all of the letters in the message are encrypted.</p>
+            <p>What was once seen as unbreakable to Carroll is actually
+            quite doable for us with Python. I was able to create a
+            script that two people could use to encrypt and decrypt
+            messages with the Vignére cipher in a terminal. This was
+            honestly an exercise to practice the lessons taught in the
+            first project in <a
+            href="https://www.freecodecamp.org/learn/scientific-computing-with-python/#learn-list-comprehension-by-building-a-case-converter-program">Scientific
+            Computing with Python</a> by freeCodeCamp. After completing
+            that project, I wanted to test what I learned; so, I created
+            my own script based on what I learned in the project
+            tutorial.</p>
+            <p>It took a lot longer than I thought, but the experience
+            was valuable. I’m going to walk through how I created this
+            script, what roadblocks I ran into, and what I learned in
+            the process.</p>
+            <h2 id="creating-the-vignére-cipher-in-python">Creating the
+            Vignére cipher in Python</h2>
+            <p>When I created this script, I intended to make it so that
+            it could be easily used. I imagined two kids sending secret
+            messages to eachother through text or email, using their own
+            computer to run this script that decryps and encrypts the
+            messages. This would require some user inputs, which was
+            different from the project tutorial I went through. But I
+            knew that the hardest part of the script would be to get the
+            logic correct. So, I spent most of my time figuring that
+            out.</p>
+            <p>To create the logic, I first defined what I needed to
+            create the logic with. This included the alphabet, a key,
+            and a message. The function would receive the message and
+            the key, and then determine the new message based on that
+            information. This looked something like this:</p>
+            <div class="sourceCode" id="cb1"><pre
+            class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>    new_message <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    alphabet <span class="op">=</span> <span class="st">&#39;abcdefghijklmnopqrstuvwxzy&#39;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    message <span class="op">=</span> <span class="st">&#39;Hello!&#39;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> fanta</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> converter(message, key):</span></code></pre></div>
+            <p>This cipher does not take into account for capital
+            letters, so I needed to convert the message string into all
+            lower case. This is done through the <code>.lower()</code>
+            function.</p>
+            <p>My next objective was to find the position of the letter
+            in the alphabet. I also wanted to track the position of the
+            letter in the message itself. Eventually, I realized I
+            didn’t need to track the position of the letter in the
+            message to accomplish my goals, so I ended up removing this
+            later.</p>
+            <p>To track the position of the letter in the alphabet, I
+            set up a <code>for</code> loop. This also served as the
+            bedrock for further logic.</p>
+            <p>The remaining tasks for me to do in the loop were finding
+            the letters of the key and their position in the
+            alphabet.</p>
+            <p>After that, I needed to find the position of the letters
+            of the encrypted message within the alphabet. To do this, I
+            addeded together the positions of the message letters in the
+            alphabet with the positions of the key letters in the
+            alphabet. The final version looked likes this:</p>
+            <div class="sourceCode" id="cb2"><pre
+            class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> converter(message, key, direction<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        lower_message <span class="op">=</span> message.lower()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        key_index <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        final_message <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> char <span class="kw">in</span> lower_message:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> char.isalpha(): <span class="co"># used to convert</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                alpha_index <span class="op">=</span> alphabet.find(char)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                key_char <span class="op">=</span> key[key_index <span class="op">%</span> <span class="bu">len</span>(key)] <span class="co"># modulo of key length is used to account for wrap-around</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                key_index <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                key_alpha_index <span class="op">=</span> alphabet.index(key_char)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                new_index <span class="op">=</span> (alpha_index <span class="op">+</span> key_alpha_index<span class="op">*</span>direction) <span class="op">%</span> <span class="bu">len</span>(alphabet) <span class="co"># modulo of alphabet length is to account for wrap-around</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>                new_char <span class="op">=</span> alphabet[new_index]</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>                final_message <span class="op">+=</span> new_char</span></code></pre></div>
+            <p>There are a couple things that were hard for me to
+            understand in the above code. The first thing was the use of
+            the modulo operator (<code>%</code>). This operator returns
+            the remainder of the division of two numbers. I learned in
+            freeCodeCamp that it was used to account for wrap-around of
+            a string when trying to find a character or an index in that
+            string. What I had a hard time understanding was that when a
+            number is divided by a number larger than itself, the
+            remainder is 0. I guess I need brush up on math. But, this
+            is useful to know when iterating through a string that isn’t
+            the string used by the for loop
+            (i.e. <code>lower_message</code> in
+            <code>for char in lower_message</code>).</p>
+            <p>The other hard thing was understanding how to do what I
+            just alluded to: work with strings that are not the string
+            used in the for loop. We needed to work with the
+            <code>key</code> string to find the letter in the same
+            position as the message, but if the key and message had
+            different character counts, we needed to wrap the key since
+            we were iterating through each letter of the message in the
+            for loop. I was trying to figure out the index of the key
+            based on the for loop iteration, but I couldn’t figure that
+            out. So I ended up seeing how I did it in the freeCodeCamp
+            project, which ended being a counter.</p>
+            <p>After I figured out that logic, what was left was to
+            combine the positions of the message character and the key
+            character in the alphabet together, and then we have our
+            encrypted letter. After that, we add that letter to a
+            string. We keep doing that until all of the letters in the
+            message are encrypted.</p>
             <p>The final code looks like this:</p>
-            <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="co"># global variables</span></span>
-            <span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>alphabet <span class="op">=</span> <span class="st">&#39;abcdefghijklmnopqrstuvwxyz&#39;</span></span>
-            <span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a></span>
-            <span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>final_message <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
-            <span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a></span>
-            <span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a><span class="co"># inputs</span></span>
-            <span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>choice <span class="op">=</span> <span class="bu">input</span>(<span class="st">&quot;Encrypt or decrypt? </span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-            <span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a></span>
-            <span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a>key <span class="op">=</span> <span class="bu">input</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">What is the key? </span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-            <span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a></span>
-            <span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a>message <span class="op">=</span> <span class="bu">input</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Message: </span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-            <span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a></span>
-            <span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a><span class="co"># functions</span></span>
-            <span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a><span class="kw">def</span> converter(message, key, direction<span class="op">=</span><span class="dv">1</span>):</span>
-            <span id="cb3-15"><a href="#cb3-15" aria-hidden="true"></a></span>
-            <span id="cb3-16"><a href="#cb3-16" aria-hidden="true"></a>    lower_message <span class="op">=</span> message.lower()</span>
-            <span id="cb3-17"><a href="#cb3-17" aria-hidden="true"></a>    key_index <span class="op">=</span> <span class="dv">0</span></span>
-            <span id="cb3-18"><a href="#cb3-18" aria-hidden="true"></a>    final_message <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
-            <span id="cb3-19"><a href="#cb3-19" aria-hidden="true"></a></span>
-            <span id="cb3-20"><a href="#cb3-20" aria-hidden="true"></a>    <span class="cf">for</span> char <span class="kw">in</span> lower_message:</span>
-            <span id="cb3-21"><a href="#cb3-21" aria-hidden="true"></a>        <span class="cf">if</span> char.isalpha(): <span class="co"># used to convert</span></span>
-            <span id="cb3-22"><a href="#cb3-22" aria-hidden="true"></a>            alpha_index <span class="op">=</span> alphabet.find(char)</span>
-            <span id="cb3-23"><a href="#cb3-23" aria-hidden="true"></a>            key_char <span class="op">=</span> key[key_index <span class="op">%</span> <span class="bu">len</span>(key)] <span class="co"># modulo of key length is used to account for wrap-around</span></span>
-            <span id="cb3-24"><a href="#cb3-24" aria-hidden="true"></a>            key_index <span class="op">+=</span> <span class="dv">1</span></span>
-            <span id="cb3-25"><a href="#cb3-25" aria-hidden="true"></a></span>
-            <span id="cb3-26"><a href="#cb3-26" aria-hidden="true"></a>            key_alpha_index <span class="op">=</span> alphabet.index(key_char)</span>
-            <span id="cb3-27"><a href="#cb3-27" aria-hidden="true"></a>            new_index <span class="op">=</span> (alpha_index <span class="op">+</span> key_alpha_index<span class="op">*</span>direction) <span class="op">%</span> <span class="bu">len</span>(alphabet) <span class="co"># modulo of alphabet length is to account for wrap-around</span></span>
-            <span id="cb3-28"><a href="#cb3-28" aria-hidden="true"></a></span>
-            <span id="cb3-29"><a href="#cb3-29" aria-hidden="true"></a>            new_char <span class="op">=</span> alphabet[new_index]</span>
-            <span id="cb3-30"><a href="#cb3-30" aria-hidden="true"></a>            final_message <span class="op">+=</span> new_char</span>
-            <span id="cb3-31"><a href="#cb3-31" aria-hidden="true"></a>        <span class="cf">else</span>: <span class="co"># passes on symbols</span></span>
-            <span id="cb3-32"><a href="#cb3-32" aria-hidden="true"></a>            final_message <span class="op">+=</span> char</span>
-            <span id="cb3-33"><a href="#cb3-33" aria-hidden="true"></a>    <span class="cf">return</span> <span class="bu">print</span>(final_message)</span>
-            <span id="cb3-34"><a href="#cb3-34" aria-hidden="true"></a></span>
-            <span id="cb3-35"><a href="#cb3-35" aria-hidden="true"></a><span class="kw">def</span> encrypt(message, key):</span>
-            <span id="cb3-36"><a href="#cb3-36" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="st">&quot;Encrypted message: </span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-            <span id="cb3-37"><a href="#cb3-37" aria-hidden="true"></a>    <span class="cf">return</span> converter(message,key)</span>
-            <span id="cb3-38"><a href="#cb3-38" aria-hidden="true"></a></span>
-            <span id="cb3-39"><a href="#cb3-39" aria-hidden="true"></a><span class="kw">def</span> decrypt(message, key):</span>
-            <span id="cb3-40"><a href="#cb3-40" aria-hidden="true"></a>    <span class="bu">print</span> (<span class="st">&quot;Decrypted message: </span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-            <span id="cb3-41"><a href="#cb3-41" aria-hidden="true"></a>    <span class="cf">return</span> converter(message, key, <span class="op">-</span><span class="dv">1</span>)</span>
-            <span id="cb3-42"><a href="#cb3-42" aria-hidden="true"></a></span>
-            <span id="cb3-43"><a href="#cb3-43" aria-hidden="true"></a><span class="co"># outputs</span></span>
-            <span id="cb3-44"><a href="#cb3-44" aria-hidden="true"></a><span class="cf">if</span> choice <span class="op">==</span> <span class="st">&quot;encrypt&quot;</span>:</span>
-            <span id="cb3-45"><a href="#cb3-45" aria-hidden="true"></a>    encrypt(message,key)</span>
-            <span id="cb3-46"><a href="#cb3-46" aria-hidden="true"></a></span>
-            <span id="cb3-47"><a href="#cb3-47" aria-hidden="true"></a><span class="cf">elif</span> choice <span class="op">==</span> <span class="st">&quot;decrypt&quot;</span>:</span>
-            <span id="cb3-48"><a href="#cb3-48" aria-hidden="true"></a>    decrypt(message, key)</span></code></pre></div>
-            <p>Other things that I included were a direction parameter for whether we wanted to decrypt messages in the <code>converter</code> function. In <code>encrypt</code> or <code>decrypt</code>, they determine which direction the converter function goes when figuring out the final position of the new letter. Encryption or decryption is determined by user inputs, as well as the key and message.</p>
+            <div class="sourceCode" id="cb3"><pre
+            class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="co"># global variables</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    alphabet <span class="op">=</span> <span class="st">&#39;abcdefghijklmnopqrstuvwxyz&#39;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    final_message <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># inputs</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    choice <span class="op">=</span> <span class="bu">input</span>(<span class="st">&quot;Encrypt or decrypt? </span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> <span class="bu">input</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">What is the key? </span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    message <span class="op">=</span> <span class="bu">input</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Message: </span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># functions</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> converter(message, key, direction<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        lower_message <span class="op">=</span> message.lower()</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        key_index <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        final_message <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> char <span class="kw">in</span> lower_message:</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> char.isalpha(): <span class="co"># used to convert</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>                alpha_index <span class="op">=</span> alphabet.find(char)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>                key_char <span class="op">=</span> key[key_index <span class="op">%</span> <span class="bu">len</span>(key)] <span class="co"># modulo of key length is used to account for wrap-around</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>                key_index <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>                key_alpha_index <span class="op">=</span> alphabet.index(key_char)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>                new_index <span class="op">=</span> (alpha_index <span class="op">+</span> key_alpha_index<span class="op">*</span>direction) <span class="op">%</span> <span class="bu">len</span>(alphabet) <span class="co"># modulo of alphabet length is to account for wrap-around</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>                new_char <span class="op">=</span> alphabet[new_index]</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>                final_message <span class="op">+=</span> new_char</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>: <span class="co"># passes on symbols</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>                final_message <span class="op">+=</span> char</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">print</span>(final_message)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> encrypt(message, key):</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;Encrypted message: </span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> converter(message,key)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> decrypt(message, key):</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="st">&quot;Decrypted message: </span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> converter(message, key, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># outputs</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> choice <span class="op">==</span> <span class="st">&quot;encrypt&quot;</span>:</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>        encrypt(message,key)</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> choice <span class="op">==</span> <span class="st">&quot;decrypt&quot;</span>:</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>        decrypt(message, key)</span></code></pre></div>
+            <p>Other things that I included were a direction parameter
+            for whether we wanted to decrypt messages in the
+            <code>converter</code> function. In <code>encrypt</code> or
+            <code>decrypt</code>, they determine which direction the
+            converter function goes when figuring out the final position
+            of the new letter. Encryption or decryption is determined by
+            user inputs, as well as the key and message.</p>
             <p>The terminal output looks like this:</p>
-            <pre><code>Encrypt or decrypt? 
-            encrypt
+            <pre><code>    Encrypt or decrypt? 
+    encrypt
 
-            What is the key? 
-            dog
+    What is the key? 
+    dog
 
-            Message: 
-            do I want a dog?
-            Encrypted message: 
+    Message: 
+    do I want a dog?
+    Encrypted message: 
 
-            gc o zotw o jru?</code></pre>
+    gc o zotw o jru?</code></pre>
             <h2 id="final-remarks">Final remarks</h2>
-            <p>There are other things in this script that I could keep talking about, but I mentioned my main takeaways. Overall, I really enjoyed doing this and was pretty challenged by it. I didn’t think I would be. I’m glad I was surprised - it’s the reason I am doing this. I want to grow, learn, and stretch my capabilities when it comes to programming. Even if that means doing things I assume are easy, because I may very well be assuming I know something when I actually don’t.</p>
+            <p>There are other things in this script that I could keep
+            talking about, but I mentioned my main takeaways. Overall, I
+            really enjoyed doing this and was pretty challenged by it. I
+            didn’t think I would be. I’m glad I was surprised - it’s the
+            reason I am doing this. I want to grow, learn, and stretch
+            my capabilities when it comes to programming. Even if that
+            means doing things I assume are easy, because I may very
+            well be assuming I know something when I actually don’t.</p>
     </body>
 </html>

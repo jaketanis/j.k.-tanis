@@ -19,41 +19,41 @@ When I created this script, I intended to make it so that it could be easily use
 To create the logic, I first defined what I needed to create the logic with. This included the alphabet, a key, and a message. The function would receive the message and the key, and then determine the new message based on that information. This looked something like this:
 
 ```python
-new_message = ''
-alphabet = 'abcdefghijklmnopqrstuvwxzy'
-message = 'Hello!'
-key = fanta
+    new_message = ''
+    alphabet = 'abcdefghijklmnopqrstuvwxzy'
+    message = 'Hello!'
+    key = fanta
 
-def converter(message, key):
+    def converter(message, key):
 ```
 This cipher does not take into account for capital letters, so I needed to convert the message string into all lower case. This is done through the `.lower()` function.
 
 My next objective was to find the position of the letter in the alphabet. I also wanted to track the position of the letter in the message itself. Eventually, I realized I didn't need to track the position of the letter in the message to accomplish my goals, so I ended up removing this later.
 
-To track the poisition of the letter in the alphabet, I set up a `for` loop. This also served as the bedrock for further logic. 
+To track the position of the letter in the alphabet, I set up a `for` loop. This also served as the bedrock for further logic. 
 
 The remaining tasks for me to do in the loop were finding the letters of the key and their position in the alphabet.
 
 After that, I needed to find the position of the letters of the encrypted message within the alphabet. To do this, I addeded together the positions of the message letters in the alphabet with the positions of the key letters in the alphabet. The final version looked likes this:
 
 ```python
-def converter(message, key, direction=1):
+    def converter(message, key, direction=1):
 
-    lower_message = message.lower()
-    key_index = 0
-    final_message = ''
+        lower_message = message.lower()
+        key_index = 0
+        final_message = ''
 
-    for char in lower_message:
-        if char.isalpha(): # used to convert
-            alpha_index = alphabet.find(char)
-            key_char = key[key_index % len(key)] # modulo of key length is used to account for wrap-around
-            key_index += 1
+        for char in lower_message:
+            if char.isalpha(): # used to convert
+                alpha_index = alphabet.find(char)
+                key_char = key[key_index % len(key)] # modulo of key length is used to account for wrap-around
+                key_index += 1
 
-            key_alpha_index = alphabet.index(key_char)
-            new_index = (alpha_index + key_alpha_index*direction) % len(alphabet) # modulo of alphabet length is to account for wrap-around
+                key_alpha_index = alphabet.index(key_char)
+                new_index = (alpha_index + key_alpha_index*direction) % len(alphabet) # modulo of alphabet length is to account for wrap-around
 
-            new_char = alphabet[new_index]
-            final_message += new_char
+                new_char = alphabet[new_index]
+                final_message += new_char
 ```
 There are a couple things that were hard for me to understand in the above code. The first thing was the use of the modulo operator (`%`). This operator returns the remainder of the division of two numbers. I learned in freeCodeCamp that it was used to account for wrap-around of a string when trying to find a character or an index in that string. What I had a hard time understanding was that when a number is divided by a number larger than itself, the remainder is 0. I guess I need brush up on math. But, this is useful to know when iterating through a string that isn't the string used by the for loop (i.e. `lower_message` in `for char in lower_message`).
 
@@ -64,54 +64,54 @@ After I figured out that logic, what was left was to combine the positions of th
 The final code looks like this:
 
 ```python
-# global variables
-alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    # global variables
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
-final_message = ''
-
-# inputs
-choice = input("Encrypt or decrypt? \n")
-
-key = input("\nWhat is the key? \n")
-
-message = input("\nMessage: \n")
-
-# functions
-def converter(message, key, direction=1):
-
-    lower_message = message.lower()
-    key_index = 0
     final_message = ''
 
-    for char in lower_message:
-        if char.isalpha(): # used to convert
-            alpha_index = alphabet.find(char)
-            key_char = key[key_index % len(key)] # modulo of key length is used to account for wrap-around
-            key_index += 1
+    # inputs
+    choice = input("Encrypt or decrypt? \n")
 
-            key_alpha_index = alphabet.index(key_char)
-            new_index = (alpha_index + key_alpha_index*direction) % len(alphabet) # modulo of alphabet length is to account for wrap-around
+    key = input("\nWhat is the key? \n")
 
-            new_char = alphabet[new_index]
-            final_message += new_char
-        else: # passes on symbols
-            final_message += char
-    return print(final_message)
+    message = input("\nMessage: \n")
 
-def encrypt(message, key):
-    print("Encrypted message: \n")
-    return converter(message,key)
+    # functions
+    def converter(message, key, direction=1):
 
-def decrypt(message, key):
-    print ("Decrypted message: \n")
-    return converter(message, key, -1)
+        lower_message = message.lower()
+        key_index = 0
+        final_message = ''
 
-# outputs
-if choice == "encrypt":
-    encrypt(message,key)
+        for char in lower_message:
+            if char.isalpha(): # used to convert
+                alpha_index = alphabet.find(char)
+                key_char = key[key_index % len(key)] # modulo of key length is used to account for wrap-around
+                key_index += 1
 
-elif choice == "decrypt":
-    decrypt(message, key)
+                key_alpha_index = alphabet.index(key_char)
+                new_index = (alpha_index + key_alpha_index*direction) % len(alphabet) # modulo of alphabet length is to account for wrap-around
+
+                new_char = alphabet[new_index]
+                final_message += new_char
+            else: # passes on symbols
+                final_message += char
+        return print(final_message)
+
+    def encrypt(message, key):
+        print("Encrypted message: \n")
+        return converter(message,key)
+
+    def decrypt(message, key):
+        print ("Decrypted message: \n")
+        return converter(message, key, -1)
+
+    # outputs
+    if choice == "encrypt":
+        encrypt(message,key)
+
+    elif choice == "decrypt":
+        decrypt(message, key)
 
 ```
 
@@ -120,17 +120,17 @@ Other things that I included were a direction parameter for whether we wanted to
 The terminal output looks like this:
 
 ```
-Encrypt or decrypt? 
-encrypt
+    Encrypt or decrypt? 
+    encrypt
 
-What is the key? 
-dog
+    What is the key? 
+    dog
 
-Message: 
-do I want a dog?
-Encrypted message: 
+    Message: 
+    do I want a dog?
+    Encrypted message: 
 
-gc o zotw o jru?
+    gc o zotw o jru?
 ```
 ## Final remarks
 
