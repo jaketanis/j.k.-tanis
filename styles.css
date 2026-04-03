@@ -19,21 +19,17 @@
     }
 
     .nav-class {
+        display: flex;
+        align-items: center;
         margin: 0em;
         padding: 1em 1em 1em 0em;
     }
 
-    .nav-links {
-        padding-right: .5em;
-        color: #969a9f;
-    }
-
-    .footer-links {
-        padding: .5em;
-        color: #969a9f;
-    }
-    .title {
-        border-bottom: 1px solid #495057;
+    .nav-class-resume {
+        display: flex;
+        align-items: center;
+        margin: 0em;
+        padding: .58em 1em 1em 0em;
     }
 
     .div-links {
@@ -43,6 +39,28 @@
         padding-top: 2em;
         padding-bottom: 2em;
         border-top: 1px solid #495057;
+        border-bottom: 1px solid #495057;
+    }
+
+    .pdf-btn {
+        margin-top: 0em;
+        margin-bottom: 0;
+        margin-left: auto;
+        border: 1px solid #495057;
+        padding: .5em .75em;
+        color: #495057;
+    }
+
+    .nav-links {
+        padding-right: .85em;
+        color: #969a9f;
+    }
+
+    .footer-links {
+        padding: .5em;
+        color: #969a9f;
+    }
+    .title {
         border-bottom: 1px solid #495057;
     }
 
@@ -344,5 +362,17 @@
         list-style-type: decimal;
         font-style: normal;
         line-height: 1.5;
+    }
+}
+
+@media print {
+    .nav-class, .print-btn { 
+        display: none; 
+    }
+
+    body { 
+        max-width: 100%; 
+        margin: 0; 
+        padding: 0; 
     }
 }
