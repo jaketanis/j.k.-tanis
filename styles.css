@@ -366,7 +366,7 @@
 }
 
 @media print {
-    .nav-class, .print-btn { 
+    .nav-class-resume, .print-btn { 
         display: none; 
     }
 
