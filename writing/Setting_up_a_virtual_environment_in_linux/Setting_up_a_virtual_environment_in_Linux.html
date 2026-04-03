@@ -29,11 +29,11 @@
             <h4 id="to-remove-a-virtual-environment">To remove a virtual environment:</h4>
             <ol type="1">
             <li><p>In your terminal, open the file location of your Python project.</p>
-            <p><img src="/home/jaketanis/j.k.-tanis/writing/Setting_up_a_virtual_environment_in_linux/image-2.png" width=50%></p></li>
+            <p><img src="image-2.png" width=50%></p></li>
             <li><p>Enter <code>ls -a</code>. The terminal displays all of the folders and files in your project.</p>
-            <p><img src="/home/jaketanis/j.k.-tanis/writing/Setting_up_a_virtual_environment_in_linux/image-4.png" width=50%></p></li>
+            <p><img src="image-4.png" width=50%></p></li>
             <li><p>Identify the virtual environment folder.</p>
-            <p><img src="/home/jaketanis/j.k.-tanis/writing/Setting_up_a_virtual_environment_in_linux/image-3.png" width=50%></p>
+            <p><img src="image-3.png" width=50%></p>
             <blockquote>
             <p><strong>Note:</strong> The folder may either be <strong>.venv</strong> or <strong>venv</strong>.</p>
             </blockquote></li>
@@ -42,7 +42,7 @@
             <p><strong>Warning:</strong> You cannot recover the folder after using this command. Use with caution.</p>
             </blockquote>
             <li><p>Enter <code>ls -a</code> again to confirm the project no longer has the folder.</p>
-            <p><img src="/home/jaketanis/j.k.-tanis/writing/Setting_up_a_virtual_environment_in_linux/image-5.png" width=50%></p></li>
+            <p><img src="image-5.png" width=50%></p></li>
             <li><p>Enter <code>git add .</code>. Git stages the changes for a commit.</p></li>
             <li><p>Enter <code>git commit -m "replace with your own message"</code>. Git commits the deleted folder.</p></li>
             <li><p>Enter <code>git push</code>. Git pushes your changes to the remote repository.</p></li>
@@ -57,21 +57,21 @@
             <p><strong>Note:</strong> If you do not want to hide the folder in your file management system, use <strong>venv</strong> instead.</p>
             </blockquote></li>
             <li><p>Enter <code>ls -a</code> to confirm <strong>.venv</strong> is in your project.</p>
-            <p><img src="/home/jaketanis/j.k.-tanis/writing/Setting_up_a_virtual_environment_in_linux/image-6.png" width=50%></p></li>
+            <p><img src="image-6.png" width=50%></p></li>
             <li><p>To activate the virtual environment, enter <code>. ./.venv/bin/activate</code>. The virtual environment activates.</p>
-            <p><img src="/home/jaketanis/j.k.-tanis/writing/Setting_up_a_virtual_environment_in_linux/image-7.png" width=50%></p></li>
+            <p><img src="image-7.png" width=50%></p></li>
             <li><p>If your project has a <strong>requirements.txt</strong> file, enter <code>pip install -r requirements.txt</code> to install the necessary dependencies in the project.</p>
             <blockquote>
             <p><strong>Note:</strong> A requirements.txt file usually contains all of the dependencies that the project uses. If your project does not have one, look through the code to determine which python modules are missing, and then install them. After you install all of the dependencies, use <code>pip freeze &gt; requirements.txt</code> to create a new requirements.txt file.</p>
             </blockquote></li>
             <li><p>After installing the dependencies, open the <strong>.gitignore</strong> file in your text editor.</p></li>
             <li><p>Enter <strong>/.venv</strong> to prevent git from adding the .venv folder to the repository.</p>
-            <p><img src="/home/jaketanis/j.k.-tanis/writing/Setting_up_a_virtual_environment_in_linux/image-8.png" width=50%></p></li>
+            <p><img src="image-8.png" width=50%></p></li>
             <li><p>Save your changes. This prevents th</p></li>
             <li><p>In your terminal, enter <code>deactivate</code>. The virtual environment deactivates.</p></li>
             <li><p>Enter <code>git add .</code>. Git stages the changes made in the .gitignore file.</p></li>
             <li><p>Enter <code>git status</code>. The terminal displays that the .gitignore file has been modified.</p>
-            <p><img src="/home/jaketanis/j.k.-tanis/writing/Setting_up_a_virtual_environment_in_linux/image-9.png" width=50%></p>
+            <p><img src="image-9.png" width=50%></p>
             <blockquote>
             <p><strong>Note:</strong> If git shows that you modified the .venv folder, then you did not add /.venv folder to .gitignore.</p>
             </blockquote></li>
