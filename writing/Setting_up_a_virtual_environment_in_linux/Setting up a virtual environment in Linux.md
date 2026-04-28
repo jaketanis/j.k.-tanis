@@ -75,7 +75,7 @@ After deleting the virtual environment you inherited, you can now setup a virtua
 
     <img src="/home/jaketanis/j.k.-tanis/writing/Setting_up_a_virtual_environment_in_linux/image-8.png" width=50%>
 
-7. Save your changes. This prevents th
+7. Save your changes.
 
 8. In your terminal, enter `deactivate`. The virtual environment deactivates.
 
