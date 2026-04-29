@@ -14,7 +14,7 @@ It took a lot longer than I thought, but the experience was valuable. I'm going 
 
 ## Creating the Vign&#233;re cipher in Python
 
-When I created this script, I intended to make it so that it could be easily used. I imagined two kids sending secret messages to eachother through text or email, using their own computer to run this script that decryps and encrypts the messages. This would require some user inputs, which was different from the project tutorial I went through. But I knew that the hardest part of the script would be to get the logic correct. So, I spent most of my time figuring that out.
+When I created this script, I intended to make it so that it could be easily used. I imagined two kids sending secret messages to eachother through text or email, using their own computer to run this script that decrypts and encrypts the messages. This would require some user inputs, which was different from the project tutorial I went through. But I knew that the hardest part of the script would be to get the logic correct. So, I spent most of my time figuring that out.
 
 To create the logic, I first defined what I needed to create the logic with. This included the alphabet, a key, and a message. The function would receive the message and the key, and then determine the new message based on that information. This looked something like this:
 
